@@ -2,27 +2,27 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="description" content="A Demo of Boost JS Tabs">
+        <meta name="description" content="A demo of Boost JS Tabs">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Boost JS Tabs Example</title>
+        <title>Boost JS Tabs Demo</title>
         <link rel="stylesheet" href="demo.css">
     </head>
     <body>
-        <ul id="tabs" data-init="tabs" class="tablist" role="tablist">
-            <li role="presentation" class="tab is-active">
-                <a href="#panel1" id="tab1" data-bind="#tabs" data-role="tab" role="tab" aria-controls="panel1">Tab 1</a>
+        <ul id="tabs" class="tabs" data-init="tabs">
+            <li>
+                <a href="#panel1" class="tab is-active" data-bind="#tabs" data-role="tab">Tab 1</a>
             </li>
-            <li role="presentation" class="tab">
-                <a href="#panel2" id="tab2" data-bind="#tabs" data-role="tab" role="tab" aria-controls="panel2">Tab 2</a>
+            <li>
+                <a href="#panel2" class="tab" data-bind="#tabs" data-role="tab">Tab 2</a>
             </li>
-            <li role="presentation" class="tab">
-                <a href="#panel3" id="tab3" data-bind="#tabs" data-role="tab" role="tab" aria-controls="panel3">Tab 3</a>
+            <li>
+                <a href="#panel3" class="tab" data-bind="#tabs" data-role="tab">Tab 3</a>
             </li>
         </ul>
-        <div id="panel1" data-bind="#tabs" data-role="panel" role="tabpanel" aria-labelledby="tab1" class="tabpanel is-active">Panel 1</div>
-        <div id="panel2" data-bind="#tabs" data-role="panel" role="tabpanel" aria-labelledby="tab2" class="tabpanel">Panel 2</div>
-        <div id="panel3" data-bind="#tabs" data-role="panel" role="tabpanel" aria-labelledby="tab3" class="tabpanel">Panel 3</div>
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <div id="panel1" class="panel is-active" data-bind="#tabs" data-role="panel">Panel 1</div>
+        <div id="panel2" class="panel" data-bind="#tabs" data-role="panel">Panel 2</div>
+        <div id="panel3" class="panel" data-bind="#tabs" data-role="panel">Panel 3</div>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
         <script src="demo.js"></script>
     </body>
 </html>

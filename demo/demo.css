@@ -1,22 +1,22 @@
-.tablist:after {
+.tabs:after {
     content: ' ';
     display: block;
     clear: both;
 }
-.tablist {
+.tabs {
     padding-left: 0;
     list-style-type: none;
 }
-.tab {
+.tabs > li {
     float: left;
     margin-right: .5rem;
 }
 .tab.is-active {
     font-weight: bold;
 }
-.tabpanel {
+.panel {
     display: none;
 }
-.tabpanel.is-active {
+.panel.is-active {
     display: inherit;
 }

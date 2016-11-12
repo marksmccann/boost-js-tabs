@@ -22,22 +22,18 @@ $.fn.tabs = boost( tabs.plugin, tabs.defaults );
 ```
 
 ### Markup Structure
-Don't forget to 1) update the `data-bind`, `id` and `href` attributes and 2) include the `.is-active` class on the tab and panel you want active when the plugin first loads.
 ```html
-<ul id="tabs" role="tablist">
-    <li class="is-active" role="presentation">
-        <a href="#panel-1" data-bind="#tabs" data-role="role" role="tab" aria-controls="panel-1">Tab 1</a>
-    </li>
-    <li role="presentation">
-        <a href="#panel-2" data-bind="#tabs" data-role="role" role="tab" aria-controls="panel-2">Tab 2</a>
-    </li>
+<ul id="tabs">
+    <li><a href="#panel1" data-bind="#tabs" data-role="tab">Tab 1</a></li>
+    <li><a href="#panel2" data-bind="#tabs" data-role="tab">Tab 2</a></li>
+    <li><a href="#panel3" data-bind="#tabs" data-role="tab">Tab 3</a></li>
 </ul>
-<div id="panel-1" data-bind="#tabs" data-role="panel" class="is-active">Panel 1</div>
-<div id="panel-2" data-bind="#tabs" data-role="panel">Panel 2</div>
+<div id="panel1" data-bind="#tabs" data-role="panel">Panel 1</div>
+<div id="panel2" data-bind="#tabs" data-role="panel">Panel 2</div>
+<div id="panel3" data-bind="#tabs" data-role="panel">Panel 3</div>
 ```
-*Note: The `role` and `aria-controls` attributes make the tabs accessible.*
 
-### Call Plugin
+### Instantiate Plugin
 ```javascript
 $('#tabs').tabs();
 ```
@@ -46,13 +42,13 @@ Options
 --------------------------------------
 
 
-
 API
 --------------------------------------
 
-### .change( 'string', callback() )
+### .changeToPanel( 'panelID', fn )
 ```javascript
-instance.changeTo(1);
+var tabs = $('#tabs').tabs();
+tabs.changeToPanel( 'panel2' );
 ```
 
 
