@@ -29,17 +29,17 @@ var Tabs = function() {
     });
     // add role="tabpanel" to every panel
     inst.roles.panel.attr('role','tabpanel');
-    // add role="tabpanel" and aria-labelledby="[tabID]" to each panel
+    // add aria-labelledby="[tabID]" to each panel
     // if tab does not have an id, create a new one and add it to tab
     for( var k in inst.pairs ) {
         var tab = inst.pairs[k][0], panel = inst.pairs[k][1];
-        var id = tab.id > 0 ? tab.id : panel.id+'-tab';
+        var id = tab.id.length === 0 ? panel.id+'-tab' : tab.id;
         $(panel).attr('role','tabpanel').attr('aria-labelledby',id);
         $(tab).attr('id', id);
     }
     // locate the currently active tab and store it's target id,
     // if an active tab has not been identified, assign the first one
-    var $activeTab = inst.roles.tab.filter( '.'+this.settings.active );
+    var $activeTab = inst.roles.tab.filter( '.'+this.settings.activeClass );
     inst.active = $activeTab.length === 1
         ? $activeTab.attr('href').replace(/^#/,'')
         : Object.keys(inst.pairs)[0];
@@ -48,7 +48,7 @@ var Tabs = function() {
     // change to the first tab to expanded true
     inst.pairs[ inst.active ].first().attr( 'aria-expanded', 'true' );
     // add the active class to the new tab and panel
-    inst.pairs[ inst.active ].addClass( inst.settings.active );
+    inst.pairs[ inst.active ].addClass( inst.settings.activeClass );
     // change tab panel when tab is clicked
     inst.roles.tab.on( 'click', function(e){
         e.preventDefault();
@@ -70,9 +70,9 @@ Tabs.prototype = {
         // local instance
         var inst = this;
         // remove the active class from previous set
-        inst.pairs[ inst.active ].removeClass( inst.settings.active )
+        inst.pairs[ inst.active ].removeClass( inst.settings.activeClass )
         // add the active class to the new tab and panel
-        inst.pairs[ id ].addClass( inst.settings.active );
+        inst.pairs[ id ].addClass( inst.settings.activeClass );
         // update accessibility attributes
         inst.pairs[ inst.active ].first().attr( 'aria-expanded', 'false' );
         inst.pairs[ id ].first().attr( 'aria-expanded', 'true' );
@@ -91,8 +91,8 @@ Tabs.prototype = {
 module.exports = {
     plugin: Tabs,
     defaults: {
-        active: 'is-active',
-        onChange: '',
-        onInit: ''
+        activeClass: 'is-active',
+        onChange: null,
+        onInit: null
     }
 }
