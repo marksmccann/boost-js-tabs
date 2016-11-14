@@ -1,22 +1,23 @@
 /**
  * Boost JS Tabs
- * A no-nonsense, style-free tabs plugin for jQuery and Boost JS
+ * A style-free tabs plugin for jQuery and Boost JS
  * @author Mark McCann (www.markmccann.me)
  * @license MIT
+ * @version 0.0.1
  * @requires jQuery, boost-js
  */
 
 var Tabs = function() {
     var inst = this;
     // pairs; each tab and panel pair organized by panel id
-    inst.pairs = {};
+    inst.pairsByPanel = {};
     inst.roles.tab.each(function(){
         // get the id from the tab's 'href'
         var id = $(this).attr('href').replace(/^#/,'');
         // get the corresponding panel with the id
         var $panel = inst.roles.panel.filter('#'+id);
         // combine the matching id and panel into one jQuery objec
-        inst.pairs[ id ] = $panel.add(this);
+        inst.pairsByPanel[ id ] = $panel.add(this);
     });
     // add attributes to key elements to make application for accessible
     // add role="tablist" to source element
@@ -31,8 +32,8 @@ var Tabs = function() {
     inst.roles.panel.attr('role','tabpanel');
     // add aria-labelledby="[tabID]" to each panel
     // if tab does not have an id, create a new one and add it to tab
-    for( var k in inst.pairs ) {
-        var tab = inst.pairs[k][0], panel = inst.pairs[k][1];
+    for( var k in inst.pairsByPanel ) {
+        var tab = inst.pairsByPanel[k][0], panel = inst.pairsByPanel[k][1];
         var id = tab.id.length === 0 ? panel.id+'-tab' : tab.id;
         $(panel).attr('role','tabpanel').attr('aria-labelledby',id);
         $(tab).attr('id', id);
@@ -40,15 +41,15 @@ var Tabs = function() {
     // locate the currently active tab and store it's target id,
     // if an active tab has not been identified, assign the first one
     var $activeTab = inst.roles.tab.filter( '.'+this.settings.activeClass );
-    inst.active = $activeTab.length === 1
+    inst.activePanel = $activeTab.length === 1
         ? $activeTab.attr('href').replace(/^#/,'')
-        : Object.keys(inst.pairs)[0];
+        : Object.keys(inst.pairsByPanel)[0];
     // add all tabs aria-expanded attribute to false
     inst.roles.tab.attr( 'aria-expanded', 'false' );
     // change to the first tab to expanded true
-    inst.pairs[ inst.active ].first().attr( 'aria-expanded', 'true' );
+    inst.pairsByPanel[ inst.activePanel ].first().attr( 'aria-expanded', 'true' );
     // add the active class to the new tab and panel
-    inst.pairs[ inst.active ].addClass( inst.settings.activeClass );
+    inst.pairsByPanel[ inst.activePanel ].addClass( inst.settings.activeClass );
     // change tab panel when tab is clicked
     inst.roles.tab.on( 'click', function(e){
         e.preventDefault();
@@ -70,16 +71,16 @@ Tabs.prototype = {
         // local instance
         var inst = this;
         // remove the active class from previous set
-        inst.pairs[ inst.active ].removeClass( inst.settings.activeClass )
+        inst.pairsByPanel[ inst.activePanel ].removeClass( inst.settings.activeClass )
         // add the active class to the new tab and panel
-        inst.pairs[ id ].addClass( inst.settings.activeClass );
+        inst.pairsByPanel[ id ].addClass( inst.settings.activeClass );
         // update accessibility attributes
-        inst.pairs[ inst.active ].first().attr( 'aria-expanded', 'false' );
-        inst.pairs[ id ].first().attr( 'aria-expanded', 'true' );
+        inst.pairsByPanel[ inst.activePanel ].first().attr( 'aria-expanded', 'false' );
+        inst.pairsByPanel[ id ].first().attr( 'aria-expanded', 'true' );
         // change focus to clicked $tab
-        inst.pairs[ id ].first()[0].focus();
+        inst.pairsByPanel[ id ].first()[0].focus();
         // reset the active panel id
-        inst.active = id;
+        inst.activePanel = id;
         // run callbacks
         if( $.isFunction(callback) ) callback.call(inst);
         if( $.isFunction(inst.settings.onChange) ) inst.settings.onChange.call(inst);
@@ -88,11 +89,19 @@ Tabs.prototype = {
     }
 }
 
-module.exports = {
+var plugin = {
     plugin: Tabs,
     defaults: {
         activeClass: 'is-active',
         onChange: null,
         onInit: null
     }
+}
+
+// if node, return via module.exports
+if (typeof require === "function" && typeof exports === "object" && typeof module === "object") {
+    module.exports = plugin;
+// otherwise, save object to jquery globally
+} else if( typeof window !== 'undefined' && typeof window.$ !== 'undefined' && typeof window.$.fn.boost !== 'undefined' ) {
+    window.$.fn.boost.tabs = plugin;
 }

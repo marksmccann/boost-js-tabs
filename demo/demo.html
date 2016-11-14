@@ -23,6 +23,13 @@
         <div id="panel2" class="panel" data-bind="#tabs" data-role="panel">Panel 2</div>
         <div id="panel3" class="panel" data-bind="#tabs" data-role="panel">Panel 3</div>
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-        <script src="demo.js"></script>
+        <script src="https://cdn.rawgit.com/marksmccann/boost-js/master/dist/boost.min.js"></script>
+        <script src="../dist/tabs.min.js"></script>
+        <script>
+            var boost = $.fn.boost;
+            var tabs = $.fn.boost.tabs;
+            $.fn.tabs = boost( tabs.plugin, tabs.defaults );
+            boost.auto();
+        </script>
     </body>
 </html>

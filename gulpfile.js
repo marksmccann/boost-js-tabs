@@ -1,18 +1,18 @@
 var gulp = require('gulp');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
-var buffer = require('vinyl-buffer');
+//var browserify = require('browserify');
+//var source = require('vinyl-source-stream');
+//var buffer = require('vinyl-buffer');
 
-gulp.task('demo', function() {
+/*gulp.task('demo', function() {
     return browserify('demo/main.js')
         .bundle()
         .pipe(source('demo.js'))
         .pipe(buffer())
         .pipe(uglify())
         .pipe(gulp.dest('demo'));
-});
+});*/
 
 gulp.task('dist', function() {
     gulp.src('src/tabs.js')
@@ -22,6 +22,6 @@ gulp.task('dist', function() {
 });
 
 gulp.task('default',function() {
-    gulp.watch('src/tabs.js',['dist','demo']);
-    gulp.watch('demo/main.js',['demo']);
+    gulp.watch('src/tabs.js',['dist']);
+    //gulp.watch('demo/main.js',['demo']);
 });

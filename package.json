@@ -2,7 +2,7 @@
   "name": "boost-js-tabs",
   "title": "Boost JS Tabs",
   "version": "0.0.1",
-  "description": "A no-nonsense, style-free tabs plugin for jQuery and Boost JS",
+  "description": "A style-free tabs plugin for jQuery and Boost JS",
   "main": "src/tabs.js",
   "scripts": {
     "start": "gulp",

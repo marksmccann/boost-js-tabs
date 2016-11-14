@@ -5,11 +5,14 @@ A style-free tabs plugin for jQuery and [Boost JS](https://github.com/marksmccan
 
 Installation
 --------------------------------------
-
+Install with npm: 
 ```bash
 npm install boost-js-tabs
 ```
-
+Install in browser:
+```html
+<script src="https://cdn.rawgit.com/marksmccann/boost-js-tabs/master/dist/tabs.min.js"></script>
+```
 
 Usage
 --------------------------------------
@@ -17,7 +20,11 @@ Usage
 ### Create Plugin
 ```javascript
 var boost = require('boost-js');
+// var boost = $.fn.boost; (browser install)
+
 var tabs = require('boost-js-tabs');
+// var tabs = $.fn.boost.tabs; (browser install)
+
 $.fn.tabs = boost( tabs.plugin, tabs.defaults );
 ```
 
@@ -50,7 +57,7 @@ onChange | `null` | a callback function called when tabs switch
 ```javascript
 $('#tabs').tabs({
 	onInit: function() {
-    	console.log( this.id ); // #tabs
+    	console.log( this.id ); // 'tabs'
     }
 });
 ```
@@ -61,12 +68,22 @@ $('#tabs').tabs({
 
 API
 --------------------------------------
-
-### .changeToPanel( 'panelID', callback )
-Provide a string with the panel id to this method to activate the specified tab. `callback` is an optional function that will be called at the end of this method.
+### changeToPanel( 'panelID', callback )
+Activate a tab by providing the desired panel's id. Optional `callback` function called after change.
 ```javascript
-var tabs = $('#tabs').tabs();
-tabs.changeToPanel( 'panel2' );
+instance.changeToPanel( 'panel2', function(){
+    console.log("Panel 2 is now active.");
+});
+```
+### activePanel
+The id of the current active panel.
+```
+instance.activePanel // [panelID]
+```
+### pairsByPanel
+Each panel and corresponding tab grouped into a jquery object and organized by panel id. 
+```
+instance.pairsByPanel // { panel1: $( 0:tab1, 1:panel1 ), ... }
 ```
 
 
@@ -74,7 +91,7 @@ Running Tests
 --------------------------------------
 
 ```bash
-$ npm install -d && npm test
+$ npm install && npm test
 ```
 
 
