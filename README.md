@@ -1,11 +1,11 @@
-Boost JS Tabs
+Boost JS Tabs  [![Build Status](https://travis-ci.org/marksmccann/boost-js-tabs.svg?branch=master)](https://travis-ci.org/marksmccann/boost-js-tabs)
 ==================================================
 A style-free tabs plugin for jQuery and [Boost JS](https://github.com/marksmccann/boost-js). While other plugins style and arrange your tabs and panels for you, this plugin only handles the functionality, leaving the layout and styling up to you.
 
 
 Installation
 --------------------------------------
-Install with npm: 
+Install with npm:
 ```bash
 npm install boost-js-tabs
 ```
@@ -81,7 +81,7 @@ The id of the current active panel.
 instance.activePanel // [panelID]
 ```
 ### pairsByPanel
-Each panel and corresponding tab grouped into a jquery object and organized by panel id. 
+Each panel and corresponding tab grouped into a jquery object and organized by panel id.
 ```
 instance.pairsByPanel // { panel1: $( 0:tab1, 1:panel1 ), ... }
 ```
