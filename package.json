@@ -12,6 +12,11 @@
     "type": "git",
     "url": "git+https://github.com/marksmccann/boost-js-tabs.git"
   },
+  "keywords": [
+    "jquery",
+    "plugin",
+    "tabs"
+  ],
   "author": "“Mark <“mail@markmccann.me”>",
   "license": "MIT",
   "bugs": {
