@@ -11,7 +11,7 @@ npm install boost-js-tabs
 ```
 Install in browser:
 ```html
-<script src="https://cdn.rawgit.com/marksmccann/boost-js-tabs/master/dist/tabs.min.js"></script>
+<script src="https://cdn.rawgit.com/marksmccann/boost-js-tabs/v0.0.2/dist/tabs.min.js"></script>
 ```
 
 Usage
